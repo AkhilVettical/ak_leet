@@ -1,12 +1,18 @@
 class Solution {
 public:
     int findDuplicate(vector<int>& nums) {
-        std::sort(nums.begin(), nums.end());
-        for(int i=1;i<nums.size();i++)
+        int fast=0, slow=0;
+        do{
+            fast=nums[nums[fast]];
+            slow=nums[slow];
+        }while(fast!=slow);
+
+        slow=0;
+        while(slow!=fast)
         {
-            if((nums[i]-nums[i-1])==0)
-             return nums[i];
+            slow=nums[slow];
+            fast=nums[fast];
         }
-        return nums[nums.size()];
+        return slow;
     }
 };
